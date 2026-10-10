@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>QuickBooks approval received</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  textarea { width: 100%; box-sizing: border-box; min-height: 7em; font: 13px/1.4 ui-monospace, Menlo, monospace;
+             background: var(--bg); color: var(--fg); border: 1px solid var(--muted); border-radius: 6px; padding: 8px; }
+  button { margin-top: 10px; font: inherit; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--muted);
+           background: var(--bg); color: var(--fg); cursor: pointer; }
+</style>
+</head>
+<body>
+<main>
+<h1>QuickBooks approval received</h1>
+<p id="msg">Copy this address into the Banister Financials terminal window.</p>
+<textarea id="reply" readonly></textarea>
+<button id="copy" type="button">Copy</button>
+</main>
+<script>
+  // Shows the reply on this page only. Nothing is sent anywhere.
+  var box = document.getElementById("reply");
+  box.value = window.location.href;
+  if (!window.location.search) {
+    document.getElementById("msg").textContent = "No approval reply in this address.";
+  }
+  document.getElementById("copy").addEventListener("click", function () {
+    box.select();
+    navigator.clipboard.writeText(box.value).then(function () {
+      document.getElementById("copy").textContent = "Copied";
+    });
+  });
+</script>
+</body>
+</html>
